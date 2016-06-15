@@ -1,5 +1,7 @@
+var port = process.env.PORT || 3000;
+var hostname = process.env.HOST || process.env.HOSTNAME;
 module.exports = {
-    "connectionString": "mongodb://localhost:27017/mean-stack-registration-login-example",
-    "apiUrl": "http://localhost:8000/api",
-    "secret": "REPLACE THIS WITH YOUR OWN SECRET, IT CAN BE ANY STRING"
+    "connectionString": process.env.MONGOHQ_URL,
+    "apiUrl": "http://"+hostname+":"+port+"/api",
+    "secret": "chaudhary-parivaar"
 };
