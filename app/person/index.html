@@ -1,0 +1,49 @@
+<h1>Person List</h1>
+<div class="row">
+	<div class="col-lg-6">
+	    <div class="input-group">
+	        <input type="text" class="form-control" ng-model="vm.query" placeholder="Search for...">
+	        <span class="input-group-btn">
+		        <button class="btn btn-primary" type="button" ng-click="vm.refreshPage()">Go!</button>
+	      	</span>
+	    </div><!-- /input-group -->
+	</div><!-- /.col-lg-6 -->
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Village</th>
+					<th>Comment</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="p in vm.persons">
+					<td width="40%">{{p.name}} {{(p.parent && p.parent.length) ? p.parent[0].name : ''}}</td>
+					<td width="20%">{{p.village}}</td>
+					<td width="20%">{{p.comment}}</td>
+					<td class="text-center glyphicon-large">
+						<p ng-if="vm.user.username === 'admin'">
+							<a href="javascript:void(0);" title="Update" ng-click="vm.updatedPerson(p)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> 
+							<a href="javascript:void(0);" title="Add Children" ng-click="vm.addPersonChildren(p)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a> 
+							<a href="javascript:void(0);" title="Delete" ng-click="vm.deletePerson(p)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+						</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div ng-if="vm.totalItems > 0">
+			<div class="row">
+				<div class="col-md-4">
+					<pre>{{vm.getPagingInfo()}}</pre>
+				</div>
+				<div class="col-md-8 text-right">
+					<uib-pagination total-items="vm.totalItems" ng-model="vm.currentPage" items-per-page="vm.limit" ng-change="vm.pageChanged()"></uib-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+<h1>Family Hierarchy</h1>
+<div class="row">
+	<div class="col-md-12">
+		<label>Search Person:</label>
+		<ui-select ng-model="vm.selectedPerson" theme="bootstrap" reset-search-input="true" title="Search Person" append-to-body="true" on-select="vm.onSelectCallback($item, $model)" style="max-width:300px;">
+		    <ui-select-match placeholder="Enter name or village name..." allow-clear="true">
+		    	{{$select.selected.name}}
+		    	<small ng-show="$select.selected.village">({{$select.selected.village}})</small>
+			</ui-select-match>
+		    <ui-select-choices repeat="p in vm.persons | filter: $select.search track by p.name" refresh="vm.refreshPersons($select.search)" refresh-delay="10">
+		        <div ng-bind-html="p.name | highlight: $select.search"></div>
+		        <small ng-show="p.village">Village: {{p.village}}</small>
+		    </ui-select-choices>
+		</ui-select>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12"><p><b>Note: </b>click on person name to view children</p></div>
+</div>
+<div id="svgholder" class="maindiv" person-org-view selected-person="vm.selectedPerson">
+    
+</div>
